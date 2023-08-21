@@ -1,5 +1,8 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
+import time
+
+x_axis = 150
 
 
 def drawPoints(x, y):
@@ -30,31 +33,36 @@ def midPointCircle(X, Y, r):
         drawPoints(X - y, Y - x)
 
 
-def drawCircles(X, Y, R):
-    midPointCircle(X, Y, R) # the big one
-    for i in range(50):
-        midPointCircle(X, Y, R - i)
+def translation():
+    global x_axis
+    x_axis += 50
+    y_axis = 700
+    Rad = 200
+    glColor3f(1.0, 1.0, 1.0)
+    midPointCircle(x_axis, y_axis, Rad)
+    for i in range(40):
+        midPointCircle(x_axis, y_axis, Rad-i)
     glColor3f(0.0, 0.0, 0.0)
-    midPointCircle(X, Y, R - 50)
+    midPointCircle(x_axis, y_axis, Rad - 40)
     glColor3f(0.0, 0.0, 1.0)
-    midPointCircle(X, Y, R - 100)
-    for i in range(100, 150):
-        midPointCircle(X, Y, R - i)
+    midPointCircle(x_axis, y_axis, Rad - 80)
+    for i in range(80, 120):
+        midPointCircle(x_axis, y_axis, Rad - i)
     glColor3f(1.0, 0.0, 0.0)
-    midPointCircle(X, Y, R - 150)
-    for i in range(150, 200):
-        midPointCircle(X, Y, R - i)
+    midPointCircle(x_axis, y_axis, Rad - 120)
+    for i in range(120, 160):
+        midPointCircle(x_axis, y_axis, Rad-i)
     glColor3f(1.0, 1.0, 0.0)
-    midPointCircle(X, Y, R - 200)
-    for i in range(200, 250):
-        midPointCircle(X, Y, R - i)
+    midPointCircle(x_axis, y_axis, Rad - 160)
+    for i in range(160, 200):
+        midPointCircle(x_axis, y_axis, Rad - i)
 
 
 def iterate():
-    glViewport(0, 0, 900, 900)
+    glViewport(0, 0, 1000, 1000)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(0.0, 900, 0.0, 900, 0.0, 1.0)
+    glOrtho(0.0, 1000, 0.0, 1000, 0.0, 1.0)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
@@ -63,16 +71,22 @@ def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     iterate()
-    glColor3f(1.0, 1.0, 1.0)
-    drawCircles(350, 350, 250)
+
+    translation()
+
     glutSwapBuffers()
 
 
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(900, 900)
+glutInitWindowSize(1000, 1000)
 glutInitWindowPosition(0, 0)
-wind = glutCreateWindow(b"CSE423 Lab Assignment03")
+wind = glutCreateWindow(b"Archery Simulation")
+t = 12
+for i in range(t):
+    glutDisplayFunc(showScreen)
+    showScreen()
+    time.sleep(0.05)
 glutDisplayFunc(showScreen)
 
 glutMainLoop()
