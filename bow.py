@@ -105,12 +105,12 @@ def showScreen():
     iterate()
     # drawing bow
     line_drawing(100, 100, 100, 200)
-    line_drawing(100, 200, 80, 180)
-    line_drawing(100, 200, 120, 180)
-    line_drawing(80, 180, 120, 180)
+    #line_drawing(100, 200, 80, 180)
+    #line_drawing(100, 200, 120, 180)
+    #line_drawing(80, 180, 120, 180)
 
-    line_drawing(100, 100, 80, 80)
-    line_drawing(100, 100, 120, 80)
+    #line_drawing(100, 100, 80, 80)
+    #line_drawing(100, 100, 120, 80)
 
     glutSwapBuffers()
 
